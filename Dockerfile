@@ -1,6 +1,9 @@
 FROM jenkins/jenkins
 MAINTAINER AJAY "sonu.ajay.in@gmail.com"
+LABEL "description"="Image contain latest awscli on top on official Jenkins image."
 
-RUN apt-get install -y git
-RUN apt-get install -y python-pip python-dev build-essential
-RUN pip install awscli
+USER root
+RUN curl -O https://bootstrap.pypa.io/get-pip.py \
+&& python get-pip.py \
+&& pip install awscli
+USER jenkins
