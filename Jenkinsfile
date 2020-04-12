@@ -4,11 +4,7 @@ pipeline {
     stages {
         stage('List S3 Buckets') {
             steps {
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                    sh "aws s3 ls"
-                    //AWS("aws s3 ls")
-                }
-                echo 'Building..'
+                sh "docker run --rm -ti -v ~/.aws:/root/.aws amazon/aws-cli s3 ls"
             }
         }
         stage('Test') {
