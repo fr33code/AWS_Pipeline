@@ -4,8 +4,11 @@ pipeline {
     stages {
         stage('List S3 Buckets') {
             steps {
-                sh "aws s3 ls"
-                echo 'Building..'
+                
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws_cred_key', variable: 'AWS_ACCESS_KEY_ID']]) {
+                        sh "echo this is ${env.AWS_ACCESS_KEY_ID}"
+                        sh "echo this is ${env.AWS_SECRET_ACCESS_KEY}"
+                }
             }
         }
         stage('Test') {
