@@ -32,8 +32,6 @@ pipeline {
                     sh "aws s3api create-bucket --bucket aws_pipeline --region ap-south-1"
                     sh "aws s3 ls"               
                 }
-                echo "AWS Key ${env.AWS_ACCESS_KEY_ID}"
-                
             }
         }
     }
