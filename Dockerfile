@@ -1,9 +1,5 @@
-FROM jenkins/jenkins
-MAINTAINER AJAY "sonu.ajay.in@gmail.com"
-LABEL "description"="Image contain latest awscli on top on official Jenkins image."
+FROM python:3-alpine
 
-USER root
-RUN curl -O https://bootstrap.pypa.io/get-pip.py \
-&& python get-pip.py \
-&& pip install awscli
-USER jenkins
+RUN apk add --no-cache bash jq zip
+COPY requirements.txt /src/requirements.txt
+RUN pip install --no-cache-dir -r /src/requirements.txt
