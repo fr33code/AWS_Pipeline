@@ -11,7 +11,7 @@ pipeline {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws_cred_key', variable: 'AWS_ACCESS_KEY_ID']]) {
                     // sh "aws configure set aws_access_key_id ${env.AWS_ACCESS_KEY_ID}"
                     // sh "aws configure set aws_secret_access_key ${env.AWS_SECRET_ACCESS_KEY}"
-                    sh "aws s3 cp /target/*.war s3://sonuajayin/apps/"
+                    sh "aws s3 cp **/target/*.war s3://sonuajayin/apps/"
                     // aws s3 rb s3://bucket-name
                 }
             }            
