@@ -7,14 +7,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building Project..'
-                sh 'mvn -B -DskipTests clean package'
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
+                sh 'mvn clean package'
+            }            
         }
         stage('DEV') {
             steps {
