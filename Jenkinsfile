@@ -33,7 +33,7 @@ pipeline {
         }
         stage('List S3 Buckets') {
             steps {                
-                
+                echo "List s3"
             }
         }
     }
