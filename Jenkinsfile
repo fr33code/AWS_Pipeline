@@ -1,4 +1,3 @@
-@Library('github.com/releaseworks/jenkinslib') _
 pipeline {
     agent{
         dockerfile true
@@ -12,7 +11,7 @@ pipeline {
                 echo 'Building Project..'
                 sh 'mvn clean package'
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                        AWS("--region=ap-south-1")
+                        
                         sh """\
                     aws s3 cp /var/jenkins_home/workspace/aws_pipeline/target/datasearch-eb.war s3://sonuajayin/apps/datasearch-eb.war
                     aws elasticbeanstalk create-application-version \
