@@ -10,7 +10,7 @@ pipeline {
             steps {
                 echo 'Building Project..'
                 sh 'mvn clean package'
-                withAWS(credentials:'aws_cred_key', region:'eu-west-1') {
+                wrap([$class: 'AmazonAwsCliBuildWrapper', credentialsId: 'aws_cred_key', defaultRegion: 'ap-south-1']) {
                     sh """\
                     aws s3 cp /var/jenkins_home/workspace/aws_pipeline/target/datasearch-eb.war s3://sonuajayin/apps/datasearch-eb.war
                     aws elasticbeanstalk create-application-version \
