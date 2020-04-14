@@ -10,7 +10,7 @@ pipeline {
             steps {
                 echo 'Building Project..'
                 sh 'mvn clean package'
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws_cred_key', defaultRegion: 'us-east-1']]) {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws_cred_key']]) {
                     sh """\
                     aws s3 cp /var/jenkins_home/workspace/aws_pipeline/target/datasearch-eb.war s3://sonuajayin/apps/datasearch-eb.war
                     aws elasticbeanstalk create-application-version \
@@ -20,8 +20,9 @@ pipeline {
                         --process \
                         --auto-create-application \
                         --query 'ApplicationVersion.VersionLabel' \
-                        --output text
-                    aws elasticbeanstalk update-environment --environment-name DatasearchEb-env-1 --application-name datasearch_eb --version-label v1.6
+                        --output text \
+                        --region ap-south-1
+                    aws elasticbeanstalk update-environment --environment-name DatasearchEb-env-1 --application-name datasearch_eb --version-label v1.6 --region ap-south-1
                     """
                 }
             }            
