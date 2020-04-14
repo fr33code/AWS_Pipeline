@@ -2,9 +2,9 @@ pipeline {
     agent{
         dockerfile true
     }
-    // environment {
-    //     AWS_DEFAULT_REGION = 'ap-south-1'
-    // }
+    environment {
+        AWS_DEFAULT_REGION = 'ap-south-1'
+    }
     stages {
         stage('Build') {
             steps {
@@ -20,9 +20,8 @@ pipeline {
                         --process \
                         --auto-create-application \
                         --query 'ApplicationVersion.VersionLabel' \
-                        --output text \
-                        --region ap-south-1
-                    aws elasticbeanstalk update-environment --environment-name DatasearchEb-env-1 --application-name datasearch_eb --version-label v1.6 --region ap-south-1
+                        --output text
+                    aws elasticbeanstalk update-environment --environment-name DatasearchEb-env-1 --application-name datasearch_eb --version-label v1.6
                     """
                 }
             }            
