@@ -3,7 +3,7 @@ pipeline {
         dockerfile true
     }
     environment {
-        AWS_DEFAULT_REGION = 'ap-south-1'
+        AWS_DEFAULT_REGION = 'us-west-2'
     }
     stages {
         stage('Build') {
