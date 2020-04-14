@@ -1,3 +1,4 @@
+@Library('github.com/releaseworks/jenkinslib') _
 pipeline {
     agent{
         dockerfile true
@@ -10,8 +11,9 @@ pipeline {
             steps {
                 echo 'Building Project..'
                 sh 'mvn clean package'
-                wrap([$class: 'AmazonAwsCliBuildWrapper', credentialsId: 'aws_cred_key', defaultRegion: 'ap-south-1']) {
-                    sh """\
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                        AWS("--region=ap-south-1")
+                        sh """\
                     aws s3 cp /var/jenkins_home/workspace/aws_pipeline/target/datasearch-eb.war s3://sonuajayin/apps/datasearch-eb.war
                     aws elasticbeanstalk create-application-version \
                         --application-name "datasearch_eb" \
@@ -24,6 +26,21 @@ pipeline {
                     aws elasticbeanstalk update-environment --environment-name DatasearchEb-env-1 --application-name datasearch_eb --version-label v1.6
                     """
                 }
+
+                // wrap([$class: 'AmazonAwsCliBuildWrapper', credentialsId: 'aws_cred_key', defaultRegion: 'ap-south-1']) {
+                //     sh """\
+                //     aws s3 cp /var/jenkins_home/workspace/aws_pipeline/target/datasearch-eb.war s3://sonuajayin/apps/datasearch-eb.war
+                //     aws elasticbeanstalk create-application-version \
+                //         --application-name "datasearch_eb" \
+                //         --version-label "1.6" \
+                //         --source-bundle "S3Bucket=sonuajayin,S3Key=apps/datasearch-eb.war" \
+                //         --process \
+                //         --auto-create-application \
+                //         --query 'ApplicationVersion.VersionLabel' \
+                //         --output text
+                //     aws elasticbeanstalk update-environment --environment-name DatasearchEb-env-1 --application-name datasearch_eb --version-label v1.6
+                //     """
+                // }
                 // withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws_cred_key']]) {
                 //     sh """\
                 //     aws s3 cp /var/jenkins_home/workspace/aws_pipeline/target/datasearch-eb.war s3://sonuajayin/apps/datasearch-eb.war
