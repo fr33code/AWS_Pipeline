@@ -17,9 +17,9 @@ pipeline {
                     sh "aws s3 cp /var/jenkins_home/workspace/aws_pipeline/target/datasearch-eb.war s3://sonuajayin/apps/"
                     // aws s3 rb s3://bucket-name
                     echo "create version"
-                    sh "aws elasticbeanstalk create-application-version --application-name datasearch_eb --version-label v1.3 --source-bundle S3Bucket=sonuajayin,S3Key=apps/datasearch-eb.war"
+                    sh "aws elasticbeanstalk create-application-version --application-name datasearch_eb --version-label v1.5 --source-bundle S3Bucket=sonuajayin,S3Key=apps/datasearch-eb.war"
                     echo "deploy"
-                    sh "aws elasticbeanstalk update-environment --application-name datasearch-eb --environment-name DatasearchEb-env-1 --version-label v1.3"
+                    sh "aws elasticbeanstalk update-environment --application-name datasearch-eb --environment-name DatasearchEb-env-1 --version-label v1.5"
                 }
             }            
         }
