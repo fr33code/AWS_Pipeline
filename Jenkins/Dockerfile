@@ -9,7 +9,7 @@ LABEL "description"="Image contain latest awscli on top on official Jenkins imag
 # USER jenkins
 
 USER root
-RUN apt-get install maven
+
 RUN apt-get -qq update \
    && apt-get -qq -y install \
    curl
