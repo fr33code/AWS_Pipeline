@@ -1,15 +1,16 @@
 FROM debian:latest
+RUN apt-get update
 # Install OpenJDK-8
-RUN apt-get update && \
-    apt-get install -y default-jdk && \
-    apt-get install -y ant && \
-    apt-get clean;
+# RUN apt-get update && \
+#     apt-get install -y default-jdk && \
+#     apt-get install -y ant && \
+#     apt-get clean;
 
-# Setup JAVA_HOME -- useful for docker commandline
-ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64/
-RUN export JAVA_HOME
+# # Setup JAVA_HOME -- useful for docker commandline
+# ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64/
+# RUN export JAVA_HOME
 
-RUN echo $JAVA_HOME
+# RUN echo $JAVA_HOME
 
 RUN apt-get install sudo -y
 
@@ -26,7 +27,6 @@ RUN sudo unzip -d /opt/gradle /tmp/gradle-*.zip
 RUN echo 'export GRADLE_HOME=/opt/gradle/gradle-6.3' >> /etc/profile.d/gradle.sh
 RUN echo 'export PATH=${GRADLE_HOME}/bin:${PATH}' >> /etc/profile.d/gradle.sh
 RUN sudo chmod +x /etc/profile.d/gradle.sh
-RUN sudo apt-get install source -y
 RUN source /etc/profile.d/gradle.sh
 RUN sudo apt-get install curl -y
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
