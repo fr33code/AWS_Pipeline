@@ -28,6 +28,7 @@ RUN echo 'export GRADLE_HOME=/opt/gradle/gradle-6.3' >> /etc/profile.d/gradle.sh
 RUN echo 'export PATH=${GRADLE_HOME}/bin:${PATH}' >> /etc/profile.d/gradle.sh
 RUN sudo chmod +x /etc/profile.d/gradle.sh
 RUN /bin/bash -c "source /etc/profile.d/gradle.sh"
+RUN gradle -v
 # RUN sudo apt-get install curl -y
 # RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 # RUN unzip awscliv2.zip
