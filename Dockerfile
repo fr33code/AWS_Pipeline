@@ -3,8 +3,10 @@ FROM python:3-alpine
 RUN apk add --no-cache bash jq zip
 COPY requirements.txt /src/requirements.txt
 RUN pip install --no-cache-dir -r /src/requirements.txt
-RUN apk add --update openjdk8-jre
+RUN apk add --update openjdk-8-jdk
 RUN java -version
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
+RUN export JAVA_HOME
 
 # RUN curl -s "https://get.sdkman.io"
 # RUN source "$HOME/.sdkman/bin/sdkman-init.sh"
