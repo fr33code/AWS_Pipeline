@@ -7,7 +7,7 @@ RUN apt-get update && \
     apt-get clean;
 
 # Setup JAVA_HOME -- useful for docker commandline
-ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64/
+ENV JAVA_HOME /usr/lib/jvm/java-1.11.0-openjdk-amd64/
 RUN export JAVA_HOME
 ENV PATH $PATH:$JAVA_HOME/bin
 RUN export PATH
