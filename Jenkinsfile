@@ -13,16 +13,16 @@ pipeline {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                         
                         sh """\
-                    aws s3 cp /var/jenkins_home/workspace/aws_pipeline/target/datasearch_app.war s3://sonuajayin/apps/datasearch_app.war
+                    aws s3 cp /var/jenkins_home/workspace/aws_pipeline/build/libs/java-sample-app-v3.jar s3://sonuajayin/apps/java-sample-app-v3.jar
                     aws elasticbeanstalk create-application-version \
-                        --application-name "datasearch_eb" \
+                        --application-name "datasearch_demo" \
                         --version-label "v3" \
-                        --source-bundle "S3Bucket=sonuajayin,S3Key=apps/datasearch_app.war" \
+                        --source-bundle "S3Bucket=sonuajayin,S3Key=apps/java-sample-app-v3.jar" \
                         --process \
                         --auto-create-application \
                         --query 'ApplicationVersion.VersionLabel' \
                         --output text
-                    aws elasticbeanstalk update-environment --environment-name dataSearch-dev --application-name datasearch_eb --version-label v3
+                    aws elasticbeanstalk update-environment --environment-name DatasearchDemo-env --application-name datasearch_demo --version-label v3
                     """
                     // sh "
                     // aws elasticbeanstalk create-environment --application-name datasearch_eb --environment-name dataSearch-dev --template-name dataSearch-config  --version-label v2"
