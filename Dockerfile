@@ -13,7 +13,7 @@ RUN echo $JAVA_HOME
 
 RUN apt-get install sudo -y
 
-RUN sudo apt-get install python3-pip
+RUN sudo apt-get install python3-pip -y
 
 RUN sudo apt-get install wget -y
 
