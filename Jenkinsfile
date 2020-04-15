@@ -24,6 +24,8 @@ pipeline {
                         --output text
                     aws elasticbeanstalk update-environment --environment-name DatasearchEb-env-1 --application-name datasearch_eb --version-label v2
                     """
+                    sh "
+                    aws elasticbeanstalk create-environment --application-name datasearch_eb --environment-name dataSearch-dev --template-name dataSearch-config  --version-label v2"
                 }
 
                 
