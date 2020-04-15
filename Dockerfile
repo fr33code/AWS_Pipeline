@@ -14,7 +14,7 @@ RUN apt-get update
 
 RUN apt-get install sudo -y
 
-RUN sudo apt-get install python3-pip -y
+# RUN sudo apt-get install python3-pip -y
 
 RUN sudo apt-get install wget -y
 
@@ -27,9 +27,9 @@ RUN sudo unzip -d /opt/gradle /tmp/gradle-*.zip
 RUN echo 'export GRADLE_HOME=/opt/gradle/gradle-6.3' >> /etc/profile.d/gradle.sh
 RUN echo 'export PATH=${GRADLE_HOME}/bin:${PATH}' >> /etc/profile.d/gradle.sh
 RUN sudo chmod +x /etc/profile.d/gradle.sh
-RUN source /etc/profile.d/gradle.sh
-RUN sudo apt-get install curl -y
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-RUN unzip awscliv2.zip
-RUN sudo ./aws/install
-RUN aws --version
+RUN /bin/bash -c "source /etc/profile.d/gradle.sh"
+# RUN sudo apt-get install curl -y
+# RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+# RUN unzip awscliv2.zip
+# RUN sudo ./aws/install
+# RUN aws --version
