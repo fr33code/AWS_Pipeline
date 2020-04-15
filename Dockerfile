@@ -33,6 +33,7 @@ ENV PATH /opt/gradle/gradle-6.3/bin:${PATH}
 RUN export GRADLE_HOME
 RUN export PATH
 RUN echo $GRADLE_HOME
+RUN echo $PATH
 RUN gradle -v
 RUN sudo apt-get install curl -y
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
