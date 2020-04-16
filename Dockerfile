@@ -1,11 +1,11 @@
 FROM debian:latest
 
-# Install OpenJDK-8
-RUN apt-get update && \
-    apt-get install -y openjdk-8-jdk && \
-    apt-get clean;
-
 RUN apt-get install sudo -y
+
+# Install OpenJDK-8
+RUN sudo apt-get update
+RUN sudo apt-get install openjdk-8-jdk -y
+
 # Setup JAVA_HOME -- useful for docker commandline
 RUN sudo update-alternatives --config java
 RUN JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
