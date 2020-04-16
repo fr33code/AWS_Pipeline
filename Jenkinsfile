@@ -4,7 +4,7 @@ pipeline {
     }
     environment {
         AWS_DEFAULT_REGION = 'ap-south-1'
-        VERSION_NUMBER='v1.1'
+        VERSION_NUMBER='v1.2'
     }
     stages {
         stage('Build') {

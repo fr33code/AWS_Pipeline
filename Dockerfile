@@ -2,8 +2,7 @@ FROM debian:latest
 
 # Install OpenJDK-8
 RUN apt-get update && \
-    apt-get install -y default-jdk && \
-    apt-get install -y ant && \
+    apt-get install -y openjdk-8-jdk && \
     apt-get clean;
 
 RUN apt-get install sudo -y
