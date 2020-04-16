@@ -6,15 +6,16 @@ RUN apt-get update && \
     apt-get install -y ant && \
     apt-get clean;
 
+RUN apt-get install sudo -y
 # Setup JAVA_HOME -- useful for docker commandline
-ENV JAVA_HOME /usr/lib/jvm/java-1.11.0-openjdk-amd64/
+RUN sudo update-alternatives --config java
+RUN JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
+# ENV JAVA_HOME /usr/lib/jvm/java-1.11.0-openjdk-amd64/
 RUN export JAVA_HOME
 ENV PATH $PATH:$JAVA_HOME/bin
 RUN export PATH
 
 RUN echo $JAVA_HOME
-
-RUN apt-get install sudo -y
 
 RUN sudo apt-get install python3-pip -y
 

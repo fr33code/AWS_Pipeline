@@ -2,7 +2,7 @@ apply plugin: 'java'
 
 jar {
     baseName = 'java-sample-app'
-    version =  'v6'
+    version =  file('version.txt').text.trim()
     manifest {
         attributes('Main-Class': 'org.example.Application')
     }
