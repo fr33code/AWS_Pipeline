@@ -6,7 +6,9 @@ FROM debian:latest
 RUN apt-get update
 RUN apt-get install sudo -y
 RUN sudo apt-get update
-RUN sudo apt-get install openjdk-8-jdk -y
+RUN sudo add-apt-repository ppa:webupd8team/java
+RUN sudo apt-get update
+RUN sudo apt-get install oracle-java8-installer
 RUN python3 --version
 RUN pythony --version
 # Setup JAVA_HOME -- useful for docker commandline
