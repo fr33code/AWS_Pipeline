@@ -5,8 +5,6 @@ FROM debian:latest
 # Install OpenJDK-8
 RUN apt-get update
 RUN apt-get install sudo -y
-RUN sudo apt-get install software-properties-common -y
-RUN sudo add-apt-repository ppa:openjdk-r/ppa
 RUN sudo apt-get update
 RUN sudo apt-get install openjdk-8-jdk -y
 RUN python3 --version
