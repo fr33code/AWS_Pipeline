@@ -17,11 +17,11 @@ aws elasticbeanstalk create-application-version \
                         --output text
 
 #Deploy Old Version to CLONE
-#aws elasticbeanstalk update-environment --environment-name DatasearchDemo-CLONE --application-name datasearch_demo --version-label $2
+aws elasticbeanstalk update-environment --environment-name DatasearchDemo-CLONE --application-name datasearch_demo --version-label $2
 #sleep 4m
 
 #Clone the PROD Environent
-# aws elasticbeanstalk create-environment --application-name datasearch_demo --environment-name DatasearchDemo-CLONE --cname-prefix datasearchdemo-clone --template-name datasearch_demo_prod_v1  --version-label v1.0
+aws elasticbeanstalk create-environment --application-name datasearch_demo --environment-name DatasearchDemo-CLONE --cname-prefix datasearchdemo-clone --template-name datasearch_demo_prod_v1  --version-label v1.0
 
 #Check Status
 aws elasticbeanstalk describe-environments --environment-names DatasearchDemo-CLONE
@@ -34,12 +34,11 @@ aws elasticbeanstalk update-environment --environment-name DatasearchDemo-PROD -
 sleep 4m
 #Check Status
 aws elasticbeanstalk describe-environments --environment-names DatasearchDemo-PROD
-TEST
+
+#TEST
 
 #Swap Urls Again to PROD
 aws elasticbeanstalk swap-environment-cnames --source-environment-name DatasearchDemo-CLONE --destination-environment-name DatasearchDemo-PROD
 
-#Deploy Latest Version to CLONE
-aws elasticbeanstalk update-environment --environment-name DatasearchDemo-CLONE --application-name datasearch_demo --version-label $1
 #Terminate Clone Environment
-#aws elasticbeanstalk terminate-environment --environment-name DatasearchDemo-CLONE
+aws elasticbeanstalk terminate-environment --environment-name DatasearchDemo-CLONE
