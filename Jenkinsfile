@@ -1,8 +1,6 @@
 {
     #!groovy
-    agent any
-
-    
+    node (){    
     stages {
         stage('Build') {     
             when { branch("master") }       
