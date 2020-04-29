@@ -14,24 +14,18 @@ pipeline {
         }
         if (env.BRANCH_NAME == 'developement') { 
             stage('DEV') {
-                steps {
-                    echo 'branch dev..'
-                }
+                echo 'branch dev..'
             }
         }
         if (env.BRANCH_NAME == 'master') { 
             stage('Staging with master') {
-                steps {
-                    echo 'Entered staging with only branch check for master..'
-                }
+                echo 'Entered staging with only branch check for master..'
             }
         }
         if (env.BRANCH_NAME == 'master') { 
             stage('Prod with master') {
                 when { tag 'release-*' }
-                steps {
-                    echo 'Entered prod with omaster and tag releaseg..'
-                }
+                echo 'Entered prod with omaster and tag releaseg..'
             }
         }
     }
