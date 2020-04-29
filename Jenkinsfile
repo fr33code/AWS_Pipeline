@@ -6,11 +6,13 @@ node { // node/agent
     echo 'Hello World' // echo Hello World
     echo 'Hello Onece more'
   }
-  stage('Stage 2') {
-    def tagInCommit = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
-        if ("${tagInCommit}".contains('release')) {
-            echo "tagname ${tagInCommit}"
-            echo "cecl"
+  def tagInCommit = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
+    if ("${tagInCommit}".contains('release')) {
+        stage('Stage 2') {
+            
+                    echo "tagname ${tagInCommit}"
+                    echo "cecl"
+                
         }
-  }
+    }
 } 
