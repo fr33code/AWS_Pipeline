@@ -1,5 +1,5 @@
+#!groovy
 {
-    #!groovy
     node (){    
     stages {
         stage('Build') {     
