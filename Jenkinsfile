@@ -1,8 +1,8 @@
 pipeline {
     agent{
-        dockerfile true
+        any
     }
-    environment {
+    environment {s
         AWS_DEFAULT_REGION = 'ap-south-1'
         VERSION_NUMBER='v2.0'
         VERSION_NUMBER_OLD='v1.0'
@@ -10,34 +10,29 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh "echo ${VERSION_NUMBER} > version.txt"
-                echo 'Building Project..'
-                
-                sh 'gradle build'
-
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                    sh "./blue_green.sh ${VERSION_NUMBER}"
-                }
+                echo "stage build"
             }            
         }
-        stage('DEV') {
-            steps {
-                echo 'Building..'
+        if (env.BRANCH_NAME == "deployment") { 
+            stage('DEV') {
+                steps {
+                    echo 'branch dev..'
+                }
             }
         }
-        stage('Staging') {
-            steps {
-                echo 'Building..'
+        if (env.BRANCH_NAME == "master") { 
+            stage('Staging with master') {
+                steps {
+                    echo 'Entered staging with only branch check for master..'
+                }
             }
         }
-        stage('Production') {
-            steps {
-                echo 'Building..'
-            }
-        }
-        stage('List S3 Buckets') {
-            steps {                
-                echo "List s3"
+        if (env.BRANCH_NAME == "master") { 
+            stage('Prod with master') {
+                when { tag "release-*" }
+                steps {
+                    echo 'Entered prod with omaster and tag release..'
+                }
             }
         }
     }
