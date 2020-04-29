@@ -3,8 +3,9 @@ node { // node/agent
     echo 'Hello World' // echo Hello World
   }
   stage('Stage 2') {
-    if ((sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()).contains('release') && (env.BRANCH_NAME == 'master')) {
-        echo 'inside commit tag'
-    }
+    def tagInCommit = sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
+        if ("${tagInCommit}".contains('release') && (env.BRANCH_NAME == 'master')) {
+            echo "tagname ${tagInCommit}"
+        }
   }
 } 
