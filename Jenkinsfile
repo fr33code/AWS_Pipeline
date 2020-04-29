@@ -12,23 +12,23 @@ pipeline {
                 echo "stage build"
             }            
         }
-        if (env.BRANCH_NAME == "developement") { 
+        if (env.BRANCH_NAME == 'developement') { 
             stage('DEV') {
                 steps {
                     echo 'branch dev..'
                 }
             }
         }
-        if (env.BRANCH_NAME == "master") { 
+        if (env.BRANCH_NAME == 'master') { 
             stage('Staging with master') {
                 steps {
                     echo 'Entered staging with only branch check for master..'
                 }
             }
         }
-        if (env.BRANCH_NAME == "master") { 
+        if (env.BRANCH_NAME == 'master') { 
             stage('Prod with master') {
-                when { tag "release-*" }
+                when { tag 'release-*' }
                 steps {
                     echo 'Entered prod with omaster and tag releaseg..'
                 }
