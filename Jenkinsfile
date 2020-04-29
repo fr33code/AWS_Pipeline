@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo "stage build"
                 echo "Branch ${env.BRANCH_NAME}"
-                sh(returnStdout: true, script: "git tag --contains").trim()
+                sh "git tag --contains"
             }            
         }
         // if (env.BRANCH_NAME == 'developement') { 
