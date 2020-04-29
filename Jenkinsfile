@@ -9,6 +9,7 @@ node { // node/agent
     def tagInCommit = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
         if ("${tagInCommit}".contains('release')) {
             echo "tagname ${tagInCommit}"
+            echo "cecl"
         }
   }
 } 
