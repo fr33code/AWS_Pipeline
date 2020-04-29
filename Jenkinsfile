@@ -1,25 +1,10 @@
-#!groovy
-{
-    node (){    
-    stages {
-        stage('Build') {     
-            when { branch("master") }       
-            steps {
-                echo "stage build"
-                echo "Branch ${env.BRANCH_NAME}"
-                
-            }            
-        }
-        stage('prod'){
-            
-            steps {
-                echo 'Deploying only because this commit is tagged...'
-                if ((sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()).contains('release') && (env.BRANCH_NAME == 'master')) {
-                    echo 'inside commit tag'
-                }
-            }
-            }
-        }
+node { // node/agent
+  stage('Stage 1') {
+    echo 'Hello World' // echo Hello World
+  }
+  stage('Stage 2') {
+    if ((sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()).contains('release') && (env.BRANCH_NAME == 'master')) {
+        echo 'inside commit tag'
     }
-}
-}
+  }
+} 
