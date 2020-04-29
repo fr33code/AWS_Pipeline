@@ -1,4 +1,7 @@
 node { // node/agent
+    stage ("checkout") {
+        checkout scm
+    }
   stage('Stage 1') {
     echo 'Hello World' // echo Hello World
   }
