@@ -16,9 +16,10 @@ pipeline {
             }            
         }
         stage('prod'){
-            when { tag "release-*" }
+            if(tag=="release-*"){
             steps {
                 echo 'Deploying only because this commit is tagged...'
+            }
             }
         }
         // if (env.BRANCH_NAME == 'developement') { 
