@@ -1,11 +1,8 @@
-pipeline {
+{
+    #!groovy
     agent any
 
-    environment {
-        AWS_DEFAULT_REGION = 'ap-south-1'
-        VERSION_NUMBER='v2.0'
-        VERSION_NUMBER_OLD='v1.0'
-    }
+    
     stages {
         stage('Build') {     
             when { branch("master") }       
@@ -16,27 +13,14 @@ pipeline {
             }            
         }
         stage('prod'){
-            if(tag=="release-*"){
+            
             steps {
                 echo 'Deploying only because this commit is tagged...'
+                if ((sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()).contains('release') && (env.BRANCH_NAME == 'master')) {
+                    echo 'inside commit tag'
+                }
             }
             }
         }
-        // if (env.BRANCH_NAME == 'developement') { 
-        //     stage('DEV') {
-        //         echo 'branch dev..'
-        //     }
-        // }
-        // if (env.BRANCH_NAME == 'master') { 
-        //     stage('Staging with master') {
-        //         echo 'Entered staging with only branch check for master..'
-        //     }
-        // }
-        // if (env.BRANCH_NAME == 'master') { 
-        //     stage('Prod with master') {
-        //         when { tag 'release-*' }
-        //         echo 'Entered prod with omaster and tag releaseg..'
-        //     }
-        // }
     }
 }
