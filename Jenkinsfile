@@ -13,7 +13,7 @@ pipeline {
                 echo "stage build"
             }            
         }
-        if (env.BRANCH_NAME == "deployment") { 
+        if (env.BRANCH_NAME == "developement") { 
             stage('DEV') {
                 steps {
                     echo 'branch dev..'
