@@ -4,6 +4,7 @@ node { // node/agent
     }
   stage('Stage 1') {
     echo 'Hello World' // echo Hello World
+    echo 'Hello Onece more'
   }
   stage('Stage 2') {
     def tagInCommit = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
