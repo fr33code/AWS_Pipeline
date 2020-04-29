@@ -7,12 +7,18 @@ pipeline {
         VERSION_NUMBER_OLD='v1.0'
     }
     stages {
-        stage('Build') {
+        stage('Build') {            
             steps {
                 echo "stage build"
                 echo "Branch ${env.BRANCH_NAME}"
-                sh "git tag --contains"
+                
             }            
+        }
+        stage('prod'){
+            when { tag "release-*" }
+            steps {
+                echo 'Deploying only because this commit is tagged...'
+            }
         }
         // if (env.BRANCH_NAME == 'developement') { 
         //     stage('DEV') {
