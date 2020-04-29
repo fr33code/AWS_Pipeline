@@ -7,7 +7,8 @@ pipeline {
         VERSION_NUMBER_OLD='v1.0'
     }
     stages {
-        stage('Build') {            
+        stage('Build') {     
+            when { branch("master") }       
             steps {
                 echo "stage build"
                 echo "Branch ${env.BRANCH_NAME}"
