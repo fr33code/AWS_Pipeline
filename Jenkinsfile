@@ -13,7 +13,7 @@ pipeline {
                 echo "stage build"
             }            
         }
-        if (env.BRANCH_NAME == "deployment") { 
+        if (env.BRANCH_NAME == "developement") { 
             stage('DEV') {
                 steps {
                     echo 'branch dev..'
@@ -31,7 +31,7 @@ pipeline {
             stage('Prod with master') {
                 when { tag "release-*" }
                 steps {
-                    echo 'Entered prod with omaster and tag release..'
+                    echo 'Entered prod with omaster and tag releaseg..'
                 }
             }
         }
