@@ -1,7 +1,7 @@
 pipeline {
     agent any
-    
-    environment {s
+
+    environment {
         AWS_DEFAULT_REGION = 'ap-south-1'
         VERSION_NUMBER='v2.0'
         VERSION_NUMBER_OLD='v1.0'
