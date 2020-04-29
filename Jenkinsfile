@@ -7,7 +7,7 @@ node { // node/agent
   }
   stage('Stage 2') {
     def tagInCommit = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
-        if ("${tagInCommit}".contains('release') && (env.BRANCH_NAME == 'master')) {
+        if ("${tagInCommit}".contains('release')) {
             echo "tagname ${tagInCommit}"
         }
   }
